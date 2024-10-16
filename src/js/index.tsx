@@ -8,20 +8,20 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 
 // react components
-import ErrorPage from './pages/error';
-import TopicsPage from './pages/topics';
-import HomePage from './pages/home';
-import CreateTopicPage from './pages/create_topic';
+import HomePage from './pages/home/home_page';
+import ErrorPage from './pages/error/error_page';
+import TopicsPage from './pages/topics/topics_page';
+import CreateTopicPage from './pages/topics/create_topic_page';
 
 // amplify
 import { Amplify } from 'aws-amplify';
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "../../amplify/data/resource";
+// import { generateClient } from "aws-amplify/data";
+// import type { Schema } from "../../amplify/data/resource";
 import outputs from '../../amplify_outputs.json';
 
 // configure amplify
 Amplify.configure(outputs);
-const client = generateClient<Schema>();
+// const client = generateClient<Schema>();
 
 // configure react
 const root = createRoot(document.getElementById('app')!);
@@ -32,11 +32,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
-        path: "/topics/",
+        path: "/topics",
         element: <TopicsPage />,
     },
     {
-        path: "/topics/create/",
+        path: "/topics/create",
         element: <CreateTopicPage />,
     },
 ]);
@@ -52,9 +52,22 @@ export default function App() {
 
 // listen for when the page is ready
 document.addEventListener("DOMContentLoaded", function () {
-    root.render(<App/>)
+    root.render(<App />);
+    highlight_active_toolbar_item();
 });
 
+// apply styles to active toolbar item
+function highlight_active_toolbar_item() {
+
+    document.querySelectorAll(".toolbar-item").forEach(item => {
+        item.classList.remove("toolbar-item-active");
+    });
+
+    let active_item = document.querySelector(".toolbar-item a[href='" + location.pathname + "']");
+    if (active_item != null) {
+        active_item.closest(".toolbar-item")?.classList.add("toolbar-item-active");
+    }
+}
  
 // document.addEventListener("DOMContentLoaded", function () {
 //     const todos: Array<Schema["Todo"]["type"]> = [];

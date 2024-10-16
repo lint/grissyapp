@@ -1,21 +1,32 @@
 
 import React from 'react';
 
-export default function Navbar() {
+export interface NavbarItems {
+    left: React.ReactNode;
+    right: React.ReactNode;
+}
+
+export default function Navbar({left, right}: NavbarItems) {
 
     function handleSettings() {
 
     }
 
     return (
-        <div id="navbar">
-            <div id="navbar-title-container">
-                <a id="navbar-title" href="/">grissy.net</a>
-            </div>
-            <div id="navbar-settings-container">
-                <div id="navbar-settings-button" className="navbar-text" onClick={handleSettings}>
-                    <i id="navbar-settings-icon" className="material-icons">settings</i>
+        <div id="page-header">
+            
+            <div id="navbar">
+                <div className="navbar-control">
+                    <a className="navbar-control" href="/">grissy.net</a>
                 </div>
+                <div className="navbar-control" onClick={handleSettings}>
+                    <i className="material-icons">settings</i>
+                </div>
+            </div>
+
+            <div id="toolbar">
+                {left}
+                {right}
             </div>
         </div>
     );
