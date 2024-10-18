@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import BasePage from '../../components/layout/base_page';
 import TopicDashboard from '../../components/topics/dashboard';
 import TopicDashboardRightToolbarItems from '../../components/topics/toolbar_items';
 import ToolbarNavItems from '../../components/navbar/toolbar_nav_items';
+import BasePage from '../base_page';
 
 export default function TopicsPage() {
 
